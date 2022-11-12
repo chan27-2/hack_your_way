@@ -19,7 +19,7 @@ if platform.system() == "Windows":
 	)
 
 	# Windows also needs poppler_exe
-	path_to_poppler_exe = Path(r"C:\.....")
+	path_to_poppler_exe = Path(r"C:\Users\ANISH AGARWAL\Downloads\poppler-0.68.0_x86\poppler-0.68.0\bin")
 	
 	# Put our output files in a sane place...
 	out_directory = Path(r"~\Desktop").expanduser()
