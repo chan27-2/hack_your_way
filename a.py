@@ -22,7 +22,7 @@ if platform.system() == "Windows":
 	path_to_poppler_exe = Path(r"C:\.....")
 	
 	# Put our output files in a sane place...
-	out_directory = Path(r"~\Desktop").expanduser()
+	out_directory = Path(r"~").expanduser()
 else:
 	out_directory = Path("~").expanduser()	
 
