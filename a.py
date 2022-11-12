@@ -27,7 +27,7 @@ else:
 	out_directory = Path("~").expanduser()	
 
 # Path of the Input pdf
-PDF_file = Path(r"d.pdf")
+PDF_file = Path(r"bengali[12-21].pdf")
 
 # Store all the pages of the PDF in a variable
 image_file_list = []
