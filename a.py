@@ -74,7 +74,7 @@ def main():
 		Part #2 - Recognizing text from the images using OCR
 		"""
 
-		with open(text_file, "a") as output_file:
+		with open(text_file, "a", encoding="utf-8") as output_file:
 			# Open the file in append mode so that
 			# All contents of all images are added to the same file
 
@@ -89,7 +89,7 @@ def main():
 				# page_n.jpg
 
 				# Recognize the text as string in image using pytesserct
-				text = str(((pytesseract.image_to_string(Image.open(image_file)))))
+				text = str(((pytesseract.image_to_string(Image.open(image_file), lang="eng+ben"))))
 
 				# The recognized text is stored in variable text
 				# Any string processing may be applied on text
