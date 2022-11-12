@@ -22,7 +22,7 @@ if platform.system() == "Windows":
 	path_to_poppler_exe = Path(r"C:\.....")
 	
 	# Put our output files in a sane place...
-	out_directory = Path(r"~\Desktop").expanduser()
+	out_directory = Path(r"~").expanduser()
 else:
 	out_directory = Path("~").expanduser()	
 
@@ -32,7 +32,7 @@ PDF_file = Path(r"bengali[12-21].pdf")
 # Store all the pages of the PDF in a variable
 image_file_list = []
 
-text_file = out_directory / Path("out_text.txt")
+text_file = out_directory / Path(r"out_text.txt")
 
 def main():
 	''' Main execution point of the program'''
@@ -89,7 +89,7 @@ def main():
 				# page_n.jpg
 
 				# Recognize the text as string in image using pytesserct
-				text = str(((pytesseract.image_to_string(Image.open(image_file)))))
+				text = str(((pytesseract.image_to_string(Image.open(image_file), "eng+ben"))))
 
 				# The recognized text is stored in variable text
 				# Any string processing may be applied on text
