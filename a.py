@@ -2,8 +2,8 @@
 
 # Import libraries
 import platform
-from tempfile import TemporaryDirectory
 from pathlib import Path
+from tempfile import TemporaryDirectory
 
 import pytesseract
 from pdf2image import convert_from_path
@@ -22,7 +22,7 @@ if platform.system() == "Windows":
 	path_to_poppler_exe = Path(r"C:\Users\ANISH AGARWAL\Downloads\poppler-0.68.0_x86\poppler-0.68.0\bin")
 	
 	# Put our output files in a sane place...
-	out_directory = Path(r"~\Desktop").expanduser()
+	out_directory = Path(r"~").expanduser()
 else:
 	out_directory = Path("~").expanduser()	
 
@@ -32,7 +32,7 @@ PDF_file = Path(r"bengali[12-21].pdf")
 # Store all the pages of the PDF in a variable
 image_file_list = []
 
-text_file = out_directory / Path("out_text.txt")
+text_file = out_directory / Path(r"out_text.txt")
 
 def main():
 	''' Main execution point of the program'''
