@@ -3,7 +3,7 @@
 # Import libraries
 import platform
 from pathlib import Path
-from tempfile import TemporaryDirectory
+from googletrans import Translator
 
 import pytesseract
 from pdf2image import convert_from_path
@@ -32,7 +32,7 @@ PDF_file = Path(r"bengali[12-21].pdf")
 # Store all the pages of the PDF in a variable
 image_file_list = []
 
-text_file = out_directory / Path(r"out_text.txt")
+text_file = out_directory / Path(r"Desktop/CS/hackathons/BITS-HackYouWay/out_text.txt")
 
 def main():
 	''' Main execution point of the program'''
@@ -101,11 +101,19 @@ def main():
 				# orGeeks is half on first line, remaining on next.
 				# To remove this, we replace every '-\n' to ''.
 				text = text.replace("-\n", "")
+				_translator = Translator()
+				n=len(text)
+				step = 3000
+				ans=""
+				print(n)
+				for i in range(0,n,step):
+					print(i)
+					result = _translator.translate(text[i:min(i+step,n)], dest="en")
+					ans = ans + result.text
+                # Finally, write the processed text to the file.
 
-				# Finally, write the processed text to the file.
-				output_file.write(text)
-
-			# At the end of the with .. output_file block
+				output_file.write(ans)
+            # At the end of the with .. output_file block
 			# the file is closed after writing all the text.
 		# At the end of the with .. tempdir block, the
 		# TemporaryDirectory() we're using gets removed!	
