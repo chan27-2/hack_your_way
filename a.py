@@ -14,6 +14,7 @@ from PIL import Image
 
 
 def extract(lan):
+    relations_data = ""
     if platform.system() == "Windows":
         # We may need to do some additional downloading and setup...
         # Windows needs a PyTesseract Download
@@ -32,7 +33,7 @@ def extract(lan):
         out_directory = Path("~").expanduser()
 
     # Path of the Input pdf
-    PDF_file = Path(r"c1_removed.pdf")
+    PDF_file = Path(r"bengali1.pdf")
 
     # Store all the pages of the PDF in a variable
     image_file_list = []
@@ -104,7 +105,7 @@ def extract(lan):
                 # Eg: This is a sample text this word here GeeksF-
                 # orGeeks is half on first line, remaining on next.
                 # To remove this, we replace every '-\n' to ''.
-                text = text.replace("-\n", "")
+                text = text.replace("-\n", " ")
                 _translator = Translator()
                 n = len(text)
                 step = 3000
@@ -113,19 +114,19 @@ def extract(lan):
                     result = _translator.translate(text[i:min(i + step, n)], dest="en")
                     ans = ans + result.text
                 # Finally, write the processed text to the file.
-                # ans = ans.replace("\n", " ")
+                ans = ans.replace("\n", " ")
                 output_file.write(ans)
-                arr = ans.split()
-                with open(relations_file, "a", encoding="utf-8") as rel_file:
-                    for i in range(0, len(arr), 1000000):
-                        proc = subprocess.Popen(['./parse'] + arr[i: min(i + 1000000, len(arr))], stdout=subprocess.PIPE)
-                        data = proc.communicate()[0]
-                        rel_file.write(data.decode())
+                arr = ans.split(" ")
+                for i in range(0, len(arr), 1000000):
+                    proc = subprocess.Popen(['./parse'] + arr[i: min(i + 1000000, len(arr))], stdout=subprocess.PIPE)
+                    data = proc.communicate()[0]
+                    print(data.decode())
+                    relations_data = relations_data + data.decode()
 
     # At the end of the with .. output_file block
+    print(relations_data)
+    return relations_data
 # the file is closed after writing all the text.
 # At the end of the with .. tempdir block, the
 # TemporaryDirectory() we're using gets removed!
 # End of main function!
-
-extract("hin")
