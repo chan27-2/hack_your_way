@@ -1,0 +1,28 @@
+Amarinder Singh->Father Singh
+Amit Bharadwaj->Father Ram
+Avtar Singh->Father Ram
+Des Raj-> Photo Available Age   Gender  Male    PBA
+Gurnam Singh->Father Singh
+Harpreet Kaur->Husband Singh
+Inderjit Kaur->Husband Singh
+Kulwinder Singh->Father Singh
+Kumar->Father Raj
+Labh Kaur->Husband Singh
+Manpreet Singh->Father Singh
+Mauji Ram Bharadwaj->Father Ram
+Meena Kumari->Husband Pal
+Mohit Kaushal->Father Pal
+Pradeep->Father Pratap
+Pratap->Father Ram
+Ram Prakash->Father Ram
+Renu Bala->Husband Kaushal
+Rishi Pal->Father Singh
+Rupinder Kaur->Husband Singh
+Sandeep Kumar->Father Raj
+Sardara Singh->Father Singh
+Seema->Father Ram
+Shallu Bhardwaj->Father Ram Bhardwaj
+Shanti Devi->Husband Singh
+Singh->Father Singh
+Village Maloya  AXN->Father Chand
+Vimala Devi->Husband Raj

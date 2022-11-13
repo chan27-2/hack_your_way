@@ -1,6 +1,8 @@
-#include <bits/stdc++.h>
+#include "bits/stdc++.h"
 
 using namespace std;
+
+typedef pair<string,string> pss;
 
 struct person
 {
@@ -14,7 +16,7 @@ struct person
 
 bool check_first(string s)
 {
-    return s == "Name";
+    return s == "Name" ;
 }
 
 bool check_father(string s)
@@ -44,14 +46,18 @@ string parse_word(string s)
     return ans;
 }
 
-map<string,pair<string,string>> solve()
+vector<string> input;
+int len;
+map< string,pss > solve()
 {
     string word;
-    map<string,pair<string,string>>ans;    // {person_name,{relation,relative_name}}
+    map<string,pss>ans;    // {person_name,{relation,relative_name}}
     bool accept=false;
     string prev="";
-    while(cin>>word)
+    int iter=1;
+    while(iter<len)
     {
+        word=input[iter++];
         word=parse_word(word);
         //cout<<word<<endl;
         if(!check_first(word) and !check_first(prev))
@@ -61,8 +67,9 @@ map<string,pair<string,string>> solve()
         string name="";
         int count=0;
         string relation="";
-        while(cin>>s)
+        while(iter<len)
         {
+            s=input[iter++];
             s=parse_word(s);
             if(check_first(s))
             {
@@ -76,7 +83,7 @@ map<string,pair<string,string>> solve()
                 else if(check_husband(s))
                 relation="Husband";
                 prev=s;
-                cin>>s;
+                s=input[iter++];
                 break;
             }
             name+=s+" ";
@@ -93,8 +100,9 @@ map<string,pair<string,string>> solve()
         {
             prev="";
             name="";
-            while(cin>>s)
+            while(iter<len)
             {
+                s=input[iter++];
                 s=parse_word(s);
                 if(check_first(s))
                 {
@@ -108,7 +116,7 @@ map<string,pair<string,string>> solve()
                     else if(check_husband(s))
                     relation="Husband";
                     prev=s;
-                    cin>>s;
+                    s=input[iter++];
                     break;
                 }
                 name+=s+" ";
@@ -119,10 +127,12 @@ map<string,pair<string,string>> solve()
         }
         if(check_first(prev))
         {
+            //cout<<"Here"<<endl;
             prev="";
             name="";
-            while(cin>>s)
+            while(iter<len)
             {
+                s=input[iter++];
                 s=parse_word(s);
                 if(check_first(s))
                 {
@@ -136,7 +146,7 @@ map<string,pair<string,string>> solve()
                     else if(check_husband(s))
                     relation="Husband";
                     prev=s;
-                    cin>>s;
+                    s=input[iter++];
                     break;
                 }
                 name+=s+" ";
@@ -151,9 +161,15 @@ map<string,pair<string,string>> solve()
             q.pop();
             string rel="";
             string temp="";
-            while(cin>>s)
+            while(iter<len)
             {
+                s=input[iter++];
                 s=parse_word(s);
+                if(check_first(s))
+                {
+                    prev=s;
+                    break;
+                }
                 if(check_father(s) or check_husband(s) or check_house(s))
                 {
                     if(check_father(s))
@@ -161,25 +177,46 @@ map<string,pair<string,string>> solve()
                     else if(check_husband(s))
                     temp="Husband";
                     prev=s;
-                    cin>>s;
+                    s=input[iter++];
                     break;
                 }
                 rel+=s+" ";
             }
             rel.pop_back();
-            ans[name]={relation,rel};
+            while(name.size() and name[0]==' ')
+                name.erase(name.begin());
+            while(name.size() and name[name.size()-1]==' ')
+                name.pop_back();
+            while(rel.size() and rel[0]==' ')
+                rel.erase(rel.begin());
+            while(rel.size() and rel[name.size()-1]==' ')
+                rel.pop_back();
+            ans[name]= make_pair(relation,rel);
             relation=temp;
         }
-        
+
     }
     return ans;
 }
 
 
-int main() {
-    map<string,pair<string,string>>m=solve();
+int main(int argc, char *argv[]) {
+
+    len=argc;
+    for (int i = 0; i <argc ; i++) {
+        input.push_back(argv[i]);
+    }
+    map<string,pss>m=solve();
     for(auto it:m)
     {
-        cout<<it.first<<"->"<<it.second.first<<" "<<it.second.second<<endl;
+        string name=it.first;
+        string relative=it.second.second;
+        cout<<it.first<<"->"<<it.second.first<<" "<<it.second.second;
+        while(m.find(relative)!=m.end())
+        {
+            cout<<"->"<<m[relative].first<<" "<<m[relative].second;
+            relative=m[relative].second;
+        }
+        cout<<endl;
     }
 }

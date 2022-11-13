@@ -1,0 +1,1 @@
+python3 -u "/Users/saichandankadarla/Desktop/CS/hackathons/BITS-HackYouWay/a.py" > g++ parsing.cpp -0 d
